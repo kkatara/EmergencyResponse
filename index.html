@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Alert System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="index.html" class="logo">RES<span>Q</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="emergency-type.html" class="nav-link">Emergency</a>
+    <a href="active-alert.html" class="nav-link">Active Alert</a>
+  </div>
+  <a href="emergency-type.html" class="nav-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+    Send Alert
+  </a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span id="h1"></span><span id="h2"></span><span id="h3"></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link active">Home <span>›</span></a>
+  <a href="emergency-type.html" class="mob-link">Emergency Type <span>›</span></a>
+  <a href="active-alert.html" class="mob-link">Active Alert <span>›</span></a>
+  <a href="emergency-type.html" class="mob-sos">🚨 SEND SOS ALERT NOW</a>
+</div>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-eyebrow"><div class="live-dot"></div>Emergency Response Network</div>
+      <h1 class="hero-title">EVERY<br><span class="accent">SECOND</span><br>COUNTS</h1>
+      <p class="hero-desc">ResQ connects you to emergency services in seconds. One tap sends your location, alert type, and contact info directly to first responders.</p>
+      <div class="cta-row">
+        <a href="emergency-type.html" class="cta-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          Send SOS Alert
+        </a>
+        <a href="active-alert.html" class="cta-secondary">Track My Alert →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Coverage</div></div>
+        <div class="stat-item"><div class="stat-num">3 UNITS</div><div class="stat-label">Active Now</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="sos-widget">
+        <div class="sos-ring-wrap">
+          <a href="emergency-type.html" class="sos-btn">
+            <span class="sos-txt">SOS</span>
+            <span class="sos-sub">TAP TO ACTIVATE</span>
+          </a>
+        </div>
+        <a href="emergency-type.html" class="tap-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          TAP TO ALERT
+        </a>
+        <div class="status-row">
+            <div class="chip">
+            <div class="chip-label">Status</div>
+            <div class="chip-val" id="systemStatus" style="color:var(--green);">STANDBY</div>
+            </div>
+            <div class="chip">
+            <div class="chip-label">Location</div>
+            <div class="chip-val" id="locationStatus" style="color:var(--muted);">CHECKING</div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon" style="background:#FEF2F2;"><svg viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div><div class="feat-title">Instant Location Share</div><div class="feat-desc">The moment you send an alert, your exact GPS location goes with it — no typing, no delay.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:#EFF6FF;"><svg viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16"/></svg></div>
+      <div><div class="feat-title">Alert Confirmation</div><div class="feat-desc">You'll know your alert was received. No guessing, no silence — just immediate confirmation that help is coming.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:#F0FDF4;"><svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div><div class="feat-title">Live Status Updates</div><div class="feat-desc">Track your alert from sent to arrived — every step of the response is visible so you're never left wondering.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">RESQ</div>
+  <div>© 2026 RESQ EMERGENCY SYSTEMS</div>
+  
+</footer>
+
+<script>
+  function toggleMenu(){
+    const m=document.getElementById('mobileMenu'),o=m.classList.toggle('open');
+    document.getElementById('h1').style.transform=o?'translateY(7px) rotate(45deg)':'';
+    document.getElementById('h2').style.opacity=o?'0':'1';
+    document.getElementById('h3').style.transform=o?'translateY(-7px) rotate(-45deg)':'';
+    document.body.style.overflow=o?'hidden':'';
+  }
+
+  // Live location chip 
+  const locEl = document.getElementById('locationStatus');
+  if (!navigator.geolocation) {
+    locEl.textContent = 'N/A';
+    locEl.style.color = 'var(--muted)';
+  } else {
+    navigator.geolocation.getCurrentPosition(
+      () => {
+        locEl.textContent = 'ACTIVE';
+        locEl.style.color = 'var(--blue)';
+      },
+      () => {
+        locEl.textContent = 'DENIED';
+        locEl.style.color = 'var(--red)';
+      },
+      { timeout: 5000 }
+    );
+  }
+
+  // Status chip: flips to ACTIVE when SOS buttons are tapped 
+  const statusEl = document.getElementById('systemStatus');
+  document.querySelectorAll('a[href="emergency-type.html"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      statusEl.textContent = 'ACTIVE';
+      statusEl.style.color = 'var(--red)';
+    });
+  });
+</script>
+</body>
+</html>

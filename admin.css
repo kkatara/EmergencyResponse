@@ -7,9 +7,9 @@
 
 /* ── CSS Variables ─────────────────────────────────────────── */
 :root {
-  --bg-base:        #ffffff;
+  --bg-base:        #f8f7f5;
   --bg-panel:       #f7f8fb;
-  --bg-card:        #ffffff;
+  --bg-card:        rgba(255,255,255,0.92);
   --bg-elevated:    #f0f2f6;
   --border:         rgba(0,0,0,0.08);
   --border-bright:  rgba(0,0,0,0.12);

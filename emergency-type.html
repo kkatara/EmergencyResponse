@@ -193,14 +193,60 @@
     document.getElementById('sendBtn').disabled = false;
   }
 
-  function sendAlert() {
+  const API_BASE = 'http://127.0.0.1:3000';
+
+  async function sendAlert() {
     if (!activeType || !selectedSituation) return;
-    localStorage.setItem('resq_alert', JSON.stringify({
+
+    // Capture location (fallback to Kabarak campus if permission is denied)
+    const location = await new Promise(resolve => {
+      if (!navigator.geolocation) return resolve({ lat: -0.20862, lng: 35.96231 });
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => resolve({ lat: -0.20862, lng: 35.96231 }),
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    });
+
+    // Local storage copy (offline fallback)
+    const localAlert = {
       id: 'RQ-' + Math.floor(Math.random()*900000+100000),
       type: activeType,
       situation: selectedSituation,
-      timestamp: new Date().toISOString()
-    }));
+      timestamp: new Date().toISOString(),
+      status: 'active',
+      location
+    };
+
+    const key = 'resq_alerts';
+    const stored = localStorage.getItem(key);
+    let alerts = [];
+    try { alerts = stored ? JSON.parse(stored) : []; } catch { alerts = []; }
+    if (!Array.isArray(alerts)) alerts = [];
+    alerts.unshift(localAlert);
+    localStorage.setItem(key, JSON.stringify(alerts));
+
+    // Send to backend (best-effort)
+    try {
+      const resp = await fetch(`${API_BASE}/api/alerts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          emergencyType: activeType,
+          situation: selectedSituation,
+          location,
+          description: selectedSituation,
+          contactInfo: { name: 'Anonymous', phone: '' }
+        })
+      });
+
+      if (!resp.ok) throw new Error(`Server responded ${resp.status}`);
+      const data = await resp.json();
+      console.log('Backend alert created', data);
+    } catch (err) {
+      console.warn('Backend unreachable (saved locally):', err);
+    }
+
     window.location.href = 'active-alert.html';
   }
 </script>
